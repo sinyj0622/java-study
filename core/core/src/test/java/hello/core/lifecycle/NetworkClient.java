@@ -1,9 +1,10 @@
 package hello.core.lifecycle;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
+public class NetworkClient {
 
     //스프링 빈은 간단하게 다음과 같은 라이프사이클을 가진다.
     //객체생성>의존관계 주입!
@@ -31,16 +32,16 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("close: " + url);
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("afterPropertiesSet");
+    @PostConstruct
+    public void init(){
+        System.out.println("init");
         connect();
         call("초기화 연결 메시지");
     }
 
-    @Override
-    public void destroy() throws Exception {
-        System.out.println("destroy");
+    @PreDestroy
+    public void close(){
+        System.out.println("close");
         disconnect();
     }
     //스프링 빈의 이벤트 라이프사이클
