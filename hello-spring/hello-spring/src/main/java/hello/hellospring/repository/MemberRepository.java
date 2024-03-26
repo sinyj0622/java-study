@@ -1,7 +1,6 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
-import net.bytebuddy.dynamic.DynamicType;
 
 import java.util.List;
 import java.util.Optional;
